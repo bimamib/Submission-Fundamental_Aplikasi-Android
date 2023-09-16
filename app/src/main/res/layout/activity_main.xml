@@ -37,7 +37,7 @@
     </com.google.android.material.search.SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_use"
+        android:id="@+id/rv_user"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -50,9 +50,23 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
-        android:id="@+id/prog_Bar"
+        android:id="@+id/progressBarUser"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/error_message"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/error_message"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserViewModel : ViewModel (){
+class UserViewModel : ViewModel() {
 
     private val _listUser = MutableLiveData<List<ItemsItem>>()
     val user: LiveData<List<ItemsItem>> = _listUser
@@ -21,17 +21,16 @@ class UserViewModel : ViewModel (){
 
     companion object {
         private const val TAG = "UserViewModel"
-//        private const val DEFAULT = "ikram"
     }
 
     init {
-        findGitHub("bima")
+        findGitHub("dicoding")
     }
 
-    private fun findGitHub(query: String) {
+    fun findGitHub(query: String) {
         _loadingScreen.value = true
         val client = ApiConfig.getApiService().getUser(query)
-        client.enqueue(object: Callback<GitHubResponse> {
+        client.enqueue(object : Callback<GitHubResponse> {
             override fun onResponse(
                 call: Call<GitHubResponse>,
                 response: Response<GitHubResponse>
@@ -39,7 +38,6 @@ class UserViewModel : ViewModel (){
                 _loadingScreen.value = false
                 if (response.isSuccessful) {
                     _listUser.value = response.body()?.items
-                    Log.d("SAT","onCreate: ${response.body()}")
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
