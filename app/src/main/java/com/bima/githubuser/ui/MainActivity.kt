@@ -1,10 +1,12 @@
 package com.bima.githubuser.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bima.githubuser.R
 import com.bima.githubuser.data.response.ItemsItem
 import com.bima.githubuser.databinding.ActivityMainBinding
 
@@ -21,11 +23,12 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
+            searchBar.inflateMenu(R.menu.option_menu)
             searchView
                 .editText
                 .setOnEditorActionListener { textView, actionId, event ->
                     searchBar.text = searchView.text
-                    searchView.hide()
+                    searchView.show()
                     userViewModel.findGitHub(searchView.text.toString())
                     userViewModel.user.observe(this@MainActivity) {
                         if (it.isNullOrEmpty()) {
@@ -36,6 +39,21 @@ class MainActivity : AppCompatActivity() {
                     }
                     false
                 }
+
+            searchBar.setOnMenuItemClickListener { menuitem ->
+                when (menuitem.itemId) {
+                    R.id.menu1 -> {
+                        val intent = Intent(this@MainActivity, FavoriteUserActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
+
+                    R.id.menu2 -> {
+                    true
+                    }
+                    else -> false
+                }
+            }
         }
 
         userViewModel.loading.observe(this) {

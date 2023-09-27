@@ -1,4 +1,4 @@
-package com.bima.githubuser.data.retrofit
+package com.bima.githubuser.data.remote.retrofit
 
 import com.bima.githubuser.data.response.DetailResponse
 import com.bima.githubuser.data.response.GitHubResponse

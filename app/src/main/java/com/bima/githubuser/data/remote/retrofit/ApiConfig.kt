@@ -1,4 +1,4 @@
-package com.bima.githubuser.data.retrofit
+package com.bima.githubuser.data.remote.retrofit
 
 import com.bima.githubuser.BuildConfig
 import okhttp3.Interceptor
@@ -13,7 +13,11 @@ class ApiConfig {
         val TOKEN = BuildConfig.KEY
         fun getApiService(): ApiService {
             val loggingInterceptor =
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+                if (BuildConfig.DEBUG) {
+                    HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+                } else {
+                    HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
+                }
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
                 val requestHeaders =

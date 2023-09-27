@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bima.githubuser.databinding.FragmentFollowBinding
 import com.bima.githubuser.ui.FollowUserAdapter
+import com.bima.githubuser.ui.ViewModelFactory
 
 class FollowFragment : Fragment() {
 
@@ -16,7 +20,7 @@ class FollowFragment : Fragment() {
     var username: String = ""
 
     private lateinit var binding: FragmentFollowBinding
-    private val detailViewModel by viewModels<DetailViewModel>()
+    private lateinit var detailViewModel: DetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +37,8 @@ class FollowFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        detailViewModel = obtainDetailViewModel(requireActivity())
 
         arguments?.let {
             position = it.getInt(ARG_POSITION)
@@ -63,6 +69,11 @@ class FollowFragment : Fragment() {
         }
     }
 
+    private fun obtainDetailViewModel(activity: FragmentActivity): DetailViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(requireActivity(), factory).get(DetailViewModel::class.java)
+    }
+
     private fun showLoading(isLoading: Boolean) {
         binding.apply {
             if (isLoading) {
@@ -72,5 +83,4 @@ class FollowFragment : Fragment() {
             }
         }
     }
-
 }

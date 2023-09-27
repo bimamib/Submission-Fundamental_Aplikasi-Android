@@ -1,17 +1,21 @@
 package com.bima.githubuser.description
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bima.githubuser.data.response.DetailResponse
 import com.bima.githubuser.data.response.ItemsItem
-import com.bima.githubuser.data.retrofit.ApiConfig
+import com.bima.githubuser.data.remote.retrofit.ApiConfig
+import com.bima.githubuser.data.repository.UserRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(application: Application) : ViewModel() {
+
+    private val userRepository: UserRepository = UserRepository(application)
 
     private val _userDetail = MutableLiveData<DetailResponse>()
     val userDetail: LiveData<DetailResponse> = _userDetail

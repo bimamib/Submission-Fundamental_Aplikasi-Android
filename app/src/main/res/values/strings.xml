@@ -9,4 +9,7 @@
     <string name="jml_following">7</string>
     <string name="username_github">User</string>
     <string name="error_message">User Not Found</string>
+    <string name="ini_tombol_favorite">ini tombol favorite</string>
+    <string name="favorite_menu">Favorite Menu</string>
+    <string name="setting">Setting</string>
 </resources>
