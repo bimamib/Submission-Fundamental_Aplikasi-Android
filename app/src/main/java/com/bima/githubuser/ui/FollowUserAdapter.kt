@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bima.githubuser.data.response.ItemsItem
 import com.bima.githubuser.databinding.ListUserBinding
-import com.bima.githubuser.description.DetailActivity
+import com.bima.githubuser.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
 
 class FollowUserAdapter : ListAdapter<ItemsItem, FollowUserAdapter.MyViewHolder>(DIFF_CALLBACK) {

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.bima.githubuser.description.FollowFragment
+import com.bima.githubuser.ui.detail.FollowFragment
 
 class SectionPagerAdapter(activity: AppCompatActivity, private val username: String) :
     FragmentStateAdapter(activity) {

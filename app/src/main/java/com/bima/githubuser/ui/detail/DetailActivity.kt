@@ -1,14 +1,15 @@
-package com.bima.githubuser.description
+package com.bima.githubuser.ui.detail
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bima.githubuser.R
+import com.bima.githubuser.data.local.entity.FavoriteUser
 import com.bima.githubuser.databinding.ActivityDetailBinding
 import com.bima.githubuser.ui.SectionPagerAdapter
 import com.bima.githubuser.ui.ViewModelFactory
@@ -20,6 +21,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private lateinit var detailViewModel: DetailViewModel
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,14 +53,64 @@ class DetailActivity : AppCompatActivity() {
                     .centerCrop()
                     .into(binding.ivProfile)
                 binding.tvName.text = it.name
-                binding.tvUsername.text = it.login
-                binding.tvFollower.text = "${it.followers} Follower"
-                binding.tvFollowing.text = "${it.following} Following"
+                binding.tvUsername.text = it.username
+                binding.tvFollower.text = "${it.followersCount} Follower"
+                binding.tvFollowing.text = "${it.followingCount} Following"
+                binding.favoriteaddUser.contentDescription = it.isFavorite.toString()
+
+                binding.apply {
+                    if (!it.isFavorite) {
+                        favoriteaddUser.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                this@DetailActivity, R.drawable.baseline_favorite_border_24
+                            )
+                        )
+                    } else {
+                        favoriteaddUser.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                this@DetailActivity, R.drawable.baseline_favorite_24
+                            )
+                        )
+                    }
+                }
             }
         }
 
         detailViewModel.loading.observe(this) {
             showLoading(it)
+        }
+
+        binding.apply {
+            favoriteaddUser.setOnClickListener {
+                val userFavorite = FavoriteUser(
+                    name = tvName.text.toString(),
+                    username = tvUsername.text.toString(),
+                    avatarUrl = avatar.toString(),
+                    isFavorite = true,
+                    followersCount = tvFollower.text.toString(),
+                    followingCount = tvFollowing.text.toString()
+                )
+
+
+                val currentIcon = favoriteaddUser.contentDescription
+                if (currentIcon.equals("true")) {
+                    favoriteaddUser.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this@DetailActivity, R.drawable.baseline_favorite_border_24
+                        )
+                    )
+                    detailViewModel.deleteUserFavorite(userFavorite)
+                    favoriteaddUser.contentDescription = "false"
+                } else {
+                    favoriteaddUser.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this@DetailActivity, R.drawable.baseline_favorite_24
+                        )
+                    )
+                    detailViewModel.insertUserFavorite(userFavorite)
+                    favoriteaddUser.contentDescription = "true"
+                }
+            }
         }
     }
 
@@ -76,6 +128,7 @@ class DetailActivity : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(this@DetailActivity, factory).get(DetailViewModel::class.java)
     }
+
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(

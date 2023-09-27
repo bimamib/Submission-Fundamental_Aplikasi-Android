@@ -12,4 +12,5 @@
     <string name="ini_tombol_favorite">ini tombol favorite</string>
     <string name="favorite_menu">Favorite Menu</string>
     <string name="setting">Setting</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

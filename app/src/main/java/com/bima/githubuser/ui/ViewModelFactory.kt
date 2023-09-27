@@ -3,9 +3,23 @@ package com.bima.githubuser.ui
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.bima.githubuser.description.DetailViewModel
+import com.bima.githubuser.ui.detail.DetailViewModel
+import com.bima.githubuser.ui.favorite.FavoriteUserViewModel
 
 class ViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
+            return UserViewModel() as T
+        } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+            return DetailViewModel(mApplication) as T
+        } else if (modelClass.isAssignableFrom(FavoriteUserViewModel::class.java)) {
+            return FavoriteUserViewModel(mApplication) as T
+        }
+        throw IllegalAccessException("Unknown ViewModel class: ${modelClass.name}")
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
@@ -19,15 +33,5 @@ class ViewModelFactory private constructor(private val mApplication: Application
             }
             return INSTANCE as ViewModelFactory
         }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
-            return UserViewModel() as T
-        } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(mApplication) as T
-        }
-        throw IllegalAccessException("Unknown ViewModel class: ${modelClass.name}")
     }
 }

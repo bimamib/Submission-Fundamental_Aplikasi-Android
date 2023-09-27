@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.FavoriteUserActivity">
+    tools:context=".ui.favorite.FavoriteUserActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_user_favorite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_user" />

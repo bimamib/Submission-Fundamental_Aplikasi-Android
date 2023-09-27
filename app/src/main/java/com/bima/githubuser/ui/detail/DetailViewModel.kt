@@ -1,14 +1,17 @@
-package com.bima.githubuser.description
+package com.bima.githubuser.ui.detail
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.bima.githubuser.data.local.entity.FavoriteUser
 import com.bima.githubuser.data.response.DetailResponse
 import com.bima.githubuser.data.response.ItemsItem
 import com.bima.githubuser.data.remote.retrofit.ApiConfig
 import com.bima.githubuser.data.repository.UserRepository
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,8 +20,8 @@ class DetailViewModel(application: Application) : ViewModel() {
 
     private val userRepository: UserRepository = UserRepository(application)
 
-    private val _userDetail = MutableLiveData<DetailResponse>()
-    val userDetail: LiveData<DetailResponse> = _userDetail
+    private val _userDetail = MutableLiveData<FavoriteUser>()
+    val userDetail: LiveData<FavoriteUser> = _userDetail
 
     private val _loadingScreen = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loadingScreen
@@ -37,6 +40,14 @@ class DetailViewModel(application: Application) : ViewModel() {
         private const val TAG = "DetailViewModel"
     }
 
+    fun insertUserFavorite(favoriteUser: FavoriteUser) {
+        userRepository.insert(favoriteUser)
+    }
+
+    fun deleteUserFavorite(favoriteUser: FavoriteUser) {
+        userRepository.delete(favoriteUser)
+    }
+
     fun getDetailUser(username: String) {
         if (!isloaded) {
             _loadingScreen.value = true
@@ -48,7 +59,22 @@ class DetailViewModel(application: Application) : ViewModel() {
                 ) {
                     _loadingScreen.value = false
                     if (response.isSuccessful) {
-                        _userDetail.postValue(response.body())
+                        val resBody = response.body()
+                        if (resBody != null) {
+                            viewModelScope.launch {
+                                val isFavoriteUser =
+                                    userRepository.isFavorite(resBody.login)
+                                val currentUser = FavoriteUser(
+                                    username = resBody.login,
+                                    name = resBody.name,
+                                    avatarUrl = resBody.avatarUrl,
+                                    followersCount = resBody.followers.toString(),
+                                    followingCount = resBody.following.toString(),
+                                    isFavorite = isFavoriteUser
+                                )
+                                _userDetail.postValue(currentUser)
+                            }
+                        }
                     } else {
                         Log.e(TAG, "onFailure: ${response.message()}")
                     }

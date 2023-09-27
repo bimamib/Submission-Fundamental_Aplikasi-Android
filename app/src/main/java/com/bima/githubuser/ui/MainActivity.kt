@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bima.githubuser.R
 import com.bima.githubuser.data.response.ItemsItem
 import com.bima.githubuser.databinding.ActivityMainBinding
+import com.bima.githubuser.ui.favorite.FavoriteUserActivity
 
 class MainActivity : AppCompatActivity() {
 
