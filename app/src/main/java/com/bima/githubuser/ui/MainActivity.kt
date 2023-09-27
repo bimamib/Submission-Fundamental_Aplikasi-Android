@@ -10,6 +10,7 @@ import com.bima.githubuser.R
 import com.bima.githubuser.data.response.ItemsItem
 import com.bima.githubuser.databinding.ActivityMainBinding
 import com.bima.githubuser.ui.favorite.FavoriteUserActivity
+import com.bima.githubuser.ui.setting.SettingActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,8 +51,11 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.menu2 -> {
-                    true
+                        val intent = Intent(this@MainActivity, SettingActivity::class.java)
+                        startActivity(intent)
+                        true
                     }
+
                     else -> false
                 }
             }
