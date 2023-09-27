@@ -7,12 +7,18 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bima.githubuser.R
 import com.bima.githubuser.data.response.ItemsItem
 import com.bima.githubuser.databinding.ActivityMainBinding
 import com.bima.githubuser.ui.favorite.FavoriteUserActivity
 import com.bima.githubuser.ui.setting.SettingActivity
+import com.bima.githubuser.ui.setting.SettingPreferences
+import com.bima.githubuser.ui.setting.SettingViewModel
+import com.bima.githubuser.ui.setting.SettingViewModelFactory
+import com.bima.githubuser.ui.setting.dataStore
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +31,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        val settingViewModel =
+            ViewModelProvider(this, SettingViewModelFactory(pref))[SettingViewModel::class.java]
+
+        settingViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
