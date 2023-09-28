@@ -1,10 +1,8 @@
-package com.bima.githubuser.ui
+package com.bima.githubuser.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
@@ -49,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             searchBar.inflateMenu(R.menu.option_menu)
             searchView
                 .editText
-                .setOnEditorActionListener { textView, actionId, event ->
+                .setOnEditorActionListener { _, _, _ ->
                     searchBar.text = searchView.text
                     searchView.show()
                     userViewModel.findGitHub(searchView.text.toString())
@@ -76,7 +74,6 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                         true
                     }
-
                     else -> false
                 }
             }

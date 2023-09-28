@@ -1,6 +1,5 @@
 package com.bima.githubuser.ui.favorite
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -25,17 +24,17 @@ class FavoriteUserAdapter :
         holder.bind(user)
     }
 
-    inner class MyViewHolder(val binding: ListUserBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item_name: FavoriteUser) {
-            binding.tvItemName.text = item_name.username
+    inner class MyViewHolder(private val binding: ListUserBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(itemName: FavoriteUser) {
+            binding.tvItemName.text = itemName.username
             Glide.with(binding.root)
-                .load(item_name.avatarUrl)
+                .load(itemName.avatarUrl)
                 .into(binding.imgItemPhoto)
             binding.root.setOnClickListener {
                 val intentDetail = Intent(binding.root.context, DetailActivity::class.java)
-                intentDetail.putExtra("ID", item_name.name)
-                intentDetail.putExtra("USERNAME", item_name.username)
-                intentDetail.putExtra("AVATAR", item_name.avatarUrl)
+                intentDetail.putExtra("ID", itemName.name)
+                intentDetail.putExtra("USERNAME", itemName.username)
+                intentDetail.putExtra("AVATAR", itemName.avatarUrl)
                 binding.root.context.startActivity(intentDetail)
             }
         }

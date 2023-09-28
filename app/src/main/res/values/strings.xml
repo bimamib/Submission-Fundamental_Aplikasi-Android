@@ -9,8 +9,11 @@
     <string name="jml_following">7</string>
     <string name="username_github">User</string>
     <string name="error_message">User Not Found</string>
-    <string name="ini_tombol_favorite">ini tombol favorite</string>
     <string name="favorite_menu">Favorite Menu</string>
     <string name="setting">Setting</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="tab_layout">tablayout</string>
+    <string name="icon1">Icon Following</string>
+    <string name="icon2">Icon Follower</string>
+    <string name="favorite_button">Tombol Favorit</string>
 </resources>

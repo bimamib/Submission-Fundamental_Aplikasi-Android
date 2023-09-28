@@ -32,9 +32,9 @@ class DetailViewModel(application: Application) : ViewModel() {
     private val _userFollowing = MutableLiveData<List<ItemsItem>>()
     val userFollowing: LiveData<List<ItemsItem>> = _userFollowing
 
-    var isloaded = false
-    var isfollowerloaded = false
-    var isfollowingloaded = false
+    private var isloaded = false
+    private var isfollowerloaded = false
+    private var isfollowingloaded = false
 
     companion object {
         private const val TAG = "DetailViewModel"

@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bima.githubuser.R
 import com.bima.githubuser.databinding.ActivityFavoriteUserBinding
 import com.bima.githubuser.ui.ViewModelFactory
-import com.bima.githubuser.ui.detail.DetailViewModel
 
 class FavoriteUserActivity : AppCompatActivity() {
 
@@ -35,6 +33,9 @@ class FavoriteUserActivity : AppCompatActivity() {
 
     private fun obtainFavoriteUserViewModel(activity: AppCompatActivity): FavoriteUserViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(this@FavoriteUserActivity, factory).get(FavoriteUserViewModel::class.java)
+        return ViewModelProvider(
+            this@FavoriteUserActivity,
+            factory
+        )[FavoriteUserViewModel::class.java]
     }
 }

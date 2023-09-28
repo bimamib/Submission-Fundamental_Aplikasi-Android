@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiConfig {
 
     companion object {
-        val TOKEN = BuildConfig.KEY
+        private const val TOKEN = BuildConfig.KEY
         fun getApiService(): ApiService {
             val loggingInterceptor =
                 if (BuildConfig.DEBUG) {

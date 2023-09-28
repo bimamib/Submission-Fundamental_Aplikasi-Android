@@ -10,7 +10,6 @@ import com.bima.githubuser.databinding.ActivitySettingBinding
 class SettingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingBinding
-//    private lateinit var viewModel: SettingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +22,8 @@ class SettingActivity : AppCompatActivity() {
         val switchTheme = binding.switchTheme
 
         val pref = SettingPreferences.getInstance(application.dataStore)
-        val settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(
-            SettingViewModel::class.java
-        )
+        val settingViewModel =
+            ViewModelProvider(this, SettingViewModelFactory(pref))[SettingViewModel::class.java]
 
         settingViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {

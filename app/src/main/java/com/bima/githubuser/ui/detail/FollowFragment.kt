@@ -14,7 +14,7 @@ import com.bima.githubuser.ui.ViewModelFactory
 
 class FollowFragment : Fragment() {
 
-    var position = 0
+    private var position = 0
     var username: String = ""
 
     private lateinit var binding: FragmentFollowBinding
@@ -69,7 +69,7 @@ class FollowFragment : Fragment() {
 
     private fun obtainDetailViewModel(activity: FragmentActivity): DetailViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(requireActivity(), factory).get(DetailViewModel::class.java)
+        return ViewModelProvider(requireActivity(), factory)[DetailViewModel::class.java]
     }
 
     private fun showLoading(isLoading: Boolean) {

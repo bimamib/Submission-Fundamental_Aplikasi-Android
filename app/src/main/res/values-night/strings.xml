@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dark_mode">Dark Mode</string>
+    <string name="tab_layout">tablayout</string>
 </resources>

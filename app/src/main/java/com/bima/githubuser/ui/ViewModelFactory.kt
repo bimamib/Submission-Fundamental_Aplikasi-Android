@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bima.githubuser.ui.detail.DetailViewModel
 import com.bima.githubuser.ui.favorite.FavoriteUserViewModel
+import com.bima.githubuser.ui.main.UserViewModel
 
 class ViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
 

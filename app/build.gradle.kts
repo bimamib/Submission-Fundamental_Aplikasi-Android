@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.bima.githubuser"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.bima.githubuser"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 

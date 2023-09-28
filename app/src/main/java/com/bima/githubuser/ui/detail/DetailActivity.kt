@@ -11,7 +11,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bima.githubuser.R
 import com.bima.githubuser.data.local.entity.FavoriteUser
 import com.bima.githubuser.databinding.ActivityDetailBinding
-import com.bima.githubuser.ui.SectionPagerAdapter
 import com.bima.githubuser.ui.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
@@ -126,7 +125,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun obtainDetailViewModel(activity: AppCompatActivity): DetailViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(this@DetailActivity, factory).get(DetailViewModel::class.java)
+        return ViewModelProvider(this@DetailActivity, factory)[DetailViewModel::class.java]
     }
 
     companion object {

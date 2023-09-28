@@ -14,16 +14,16 @@ import com.bumptech.glide.Glide
 class FollowUserAdapter : ListAdapter<ItemsItem, FollowUserAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(private val binding: ListUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item_name: ItemsItem) {
-            binding.tvItemName.text = item_name.login
+        fun bind(itemName: ItemsItem) {
+            binding.tvItemName.text = itemName.login
             Glide.with(binding.root)
-                .load(item_name.avatarUrl)
+                .load(itemName.avatarUrl)
                 .into(binding.imgItemPhoto)
             binding.root.setOnClickListener {
                 val intentDetail = Intent(binding.root.context, DetailActivity::class.java)
-                intentDetail.putExtra("ID", item_name.id)
-                intentDetail.putExtra("USERNAME", item_name.login)
-                intentDetail.putExtra("AVATAR", item_name.avatarUrl)
+                intentDetail.putExtra("ID", itemName.id)
+                intentDetail.putExtra("USERNAME", itemName.login)
+                intentDetail.putExtra("AVATAR", itemName.avatarUrl)
                 binding.root.context.startActivity(intentDetail)
             }
         }

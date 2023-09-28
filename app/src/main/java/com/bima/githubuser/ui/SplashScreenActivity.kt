@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.bima.githubuser.R
 import com.bima.githubuser.databinding.ActivitySplashScreenBinding
+import com.bima.githubuser.ui.main.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding

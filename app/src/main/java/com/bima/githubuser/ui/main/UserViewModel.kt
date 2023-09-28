@@ -1,4 +1,4 @@
-package com.bima.githubuser.ui
+package com.bima.githubuser.ui.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
