@@ -61,10 +61,11 @@ class DetailViewModel(application: Application) : ViewModel() {
                     if (response.isSuccessful) {
                         val resBody = response.body()
                         if (resBody != null) {
+                            // untuk mengecek user apakah ada di database
                             viewModelScope.launch {
                                 val isFavoriteUser =
                                     userRepository.isFavorite(resBody.login)
-                                val currentUser = FavoriteUser(
+                                val currentUser = FavoriteUser( // memanggil yang ada di database tanpa menggunakan intent
                                     username = resBody.login,
                                     name = resBody.name,
                                     avatarUrl = resBody.avatarUrl,

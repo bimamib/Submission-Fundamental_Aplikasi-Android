@@ -55,17 +55,17 @@ class DetailActivity : AppCompatActivity() {
                 binding.tvUsername.text = it.username
                 binding.tvFollower.text = "${it.followersCount} Follower"
                 binding.tvFollowing.text = "${it.followingCount} Following"
-                binding.favoriteaddUser.contentDescription = it.isFavorite.toString()
+                binding.favoriteAdduser.contentDescription = it.isFavorite.toString()
 
                 binding.apply {
                     if (!it.isFavorite) {
-                        favoriteaddUser.setImageDrawable(
+                        favoriteAdduser.setImageDrawable(
                             ContextCompat.getDrawable(
                                 this@DetailActivity, R.drawable.baseline_favorite_border_24
                             )
                         )
                     } else {
-                        favoriteaddUser.setImageDrawable(
+                        favoriteAdduser.setImageDrawable(
                             ContextCompat.getDrawable(
                                 this@DetailActivity, R.drawable.baseline_favorite_24
                             )
@@ -80,7 +80,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         binding.apply {
-            favoriteaddUser.setOnClickListener {
+            favoriteAdduser.setOnClickListener {
                 val userFavorite = FavoriteUser(
                     name = tvName.text.toString(),
                     username = tvUsername.text.toString(),
@@ -90,24 +90,23 @@ class DetailActivity : AppCompatActivity() {
                     followingCount = tvFollowing.text.toString()
                 )
 
-
-                val currentIcon = favoriteaddUser.contentDescription
+                val currentIcon = favoriteAdduser.contentDescription
                 if (currentIcon.equals("true")) {
-                    favoriteaddUser.setImageDrawable(
+                    favoriteAdduser.setImageDrawable(
                         ContextCompat.getDrawable(
                             this@DetailActivity, R.drawable.baseline_favorite_border_24
                         )
                     )
                     detailViewModel.deleteUserFavorite(userFavorite)
-                    favoriteaddUser.contentDescription = "false"
+                    favoriteAdduser.contentDescription = "false"
                 } else {
-                    favoriteaddUser.setImageDrawable(
+                    favoriteAdduser.setImageDrawable(
                         ContextCompat.getDrawable(
                             this@DetailActivity, R.drawable.baseline_favorite_24
                         )
                     )
                     detailViewModel.insertUserFavorite(userFavorite)
-                    favoriteaddUser.contentDescription = "true"
+                    favoriteAdduser.contentDescription = "true"
                 }
             }
         }

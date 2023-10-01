@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 .editText
                 .setOnEditorActionListener { _, _, _ ->
                     searchBar.text = searchView.text
-                    searchView.show()
+                    searchView.hide()
                     userViewModel.findGitHub(searchView.text.toString())
                     userViewModel.user.observe(this@MainActivity) {
                         if (it.isNullOrEmpty()) {

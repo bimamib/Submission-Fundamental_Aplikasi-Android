@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.bima.githubuser"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.bima.githubuser"
@@ -17,7 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "KEY", "\"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\"")
+        buildConfigField("String", "KEY", "API_KEY")
         buildConfigField("String", "BASE_URL", "\"https://api.github.com\"")
     }
 
